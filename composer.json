@@ -1,0 +1,19 @@
+{
+    "name": "crud/crud",
+    "description": "Project to Understand CRUD",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rajnish Kumar",
+            "email": "rajnishmsrit@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "classmap": [
+            "app"
+        ]
+    }
+}
