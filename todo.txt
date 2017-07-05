@@ -1,0 +1,5 @@
+- Db setup DONE
+- page to see db and tables
+- page to see table and its schema
+- page to alter data
+
