@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 
 use App\Code\Database\Database;
-use App\Code\Database\QueryDatabase;
+use App\Code\Database\QueryTable;
 
 ?>
 <!DOCTYPE html>
@@ -43,34 +43,25 @@ use App\Code\Database\QueryDatabase;
       <?php
     }
 
-
-    $crud = new QueryDatabase();
-    //print("<pre>");
-    //print_r($crud->getData());
-    //print("</pre>");
+    if(isset($_GET) && isset($_GET['table'])){
+      $table_name = $_GET['table'];
+    }else{
+      $table_name = "customers";
+    }
 
     ?>
 
-    <div>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="col-md-4">
-          Database
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <?php print $table_name;?>
 
-         <?php
-            foreach ($crud->getTables() as $key => $value) {
-              print("<li><a href='crud.php?table=$value[0]'>$value[0]</a></li>");
-            }
-          ?>
+    <?php
+      $table = new QueryTable();
+      $columns = $table->getColumns($table_name);
+      print("<pre>");
+      print_r($columns);
 
-        </ul>
-      </div>
-    </div>
+     ?>
   </body>
 </html>
-
 
 <script type="text/javascript">
 </script>
