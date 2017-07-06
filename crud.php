@@ -23,7 +23,7 @@ use App\Code\Database\QueryTable;
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand text-center" href="#">
+          <a class="navbar-brand text-center" href="index.php">
             Crud Operation
           </a>
         </div>
@@ -49,17 +49,33 @@ use App\Code\Database\QueryTable;
       $table_name = "customers";
     }
 
+    $table = new QueryTable();
+    $columns = $table->getColumns($table_name);
+
     ?>
 
-    <?php print $table_name;?>
-
-    <?php
-      $table = new QueryTable();
-      $columns = $table->getColumns($table_name);
-      print("<pre>");
-      print_r($columns);
-
-     ?>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <?php
+            foreach ($columns[0] as $key => $value) {
+              echo "<td>".ucfirst($key)."</td>";
+            }
+          ?>
+        </tr>
+      </thead>
+      <tbody>
+          <?php
+            foreach ($columns as $key => $value) {
+              echo "<tr>";
+              foreach ($value as $data => $val) {
+                echo "<td>".ucfirst($val)."</td>";
+              }
+              echo "</tr>";
+            }
+          ?>
+      </tbody>
+    </table>
   </body>
 </html>
 
