@@ -3,10 +3,12 @@
 namespace App\Code\Database;
 
 use App\Code\Database\Database;
+use \PDO;
 
-class Crud
+class QueryTable
 {
   public $link;
+  private $database = "crud";
 
   function __construct()
   {
@@ -15,10 +17,11 @@ class Crud
     return $this->link;
   }
 
-  function getData(){
-    $query=$this->link->prepare("select * from customers");
+  function getColumns($table){
+    $this->table = $table;
+    $query=$this->link->prepare("select * from $this->table");
     $query->execute();
-    return $query->fetchAll();
+    return $query->fetchALL(PDO::FETCH_ASSOC);
   }
 
 }
