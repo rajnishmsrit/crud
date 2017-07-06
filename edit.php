@@ -46,42 +46,26 @@ use App\Code\Database\QueryTable;
     if(isset($_GET) && isset($_GET['table'])){
       $table_name = $_GET['table'];
     }else{
-      $table_name = "customers";
+      //todo: set error
     }
 
+    if(isset($_GET) && isset($_GET['idname']) && isset($_GET['idvalue'])){
+      $idname = $_GET['idname'];
+      $idvalue = $_GET['idvalue'];
+    }else{
+      //todo: set error
+    }
+
+    //print $table_name;
+    //print "<br>$idname";
+    //print "<br>$idvalue";
+
     $table = new QueryTable();
-    $columns = $table->getColumns($table_name);
+    $column = $table->getColumnData($table_name, $idname, $idvalue);
+    print("<pre>");
+    print_r($column);
 
     ?>
 
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <?php
-            foreach ($columns[0] as $key => $value) {
-              echo "<td>".ucfirst($key)."</td>";
-            }
-          ?>
-          <td width="5%">Edit</td>
-        </tr>
-      </thead>
-      <tbody>
-          <?php
-            foreach ($columns as $key => $value) {
-              echo "<tr>";
-
-              //print_r($value);
-              foreach ($value as $data => $val) {
-                echo "<td>".ucfirst($val)."</td>";
-              }
-              $key=key($value);
-              echo "<td><a class='btn btn-primary' href='edit.php?table=$table_name&idname=$key&idvalue=".$value[$key]."'>Edit</a></td></tr>";
-            }
-          ?>
-      </tbody>
-    </table>
   </body>
 </html>
-
-<script type="text/javascript">
-</script>

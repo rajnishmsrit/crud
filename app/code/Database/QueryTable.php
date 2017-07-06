@@ -17,11 +17,18 @@ class QueryTable
     return $this->link;
   }
 
-  function getColumns($table){
-    $this->table = $table;
-    $query=$this->link->prepare("select * from $this->table");
+  function getColumns($table_name){
+    $this->table_name = $table_name;
+    $query=$this->link->prepare("select * from $this->table_name");
     $query->execute();
     return $query->fetchALL(PDO::FETCH_ASSOC);
+  }
+
+  function getColumnData($table_name, $idname, $idvalue){
+    $this->table_name = $table_name;
+    $query=$this->link->prepare("select * from $this->table_name where $idname=$idvalue");
+    $query->execute();
+    return $query->fetchALL();
   }
 
 }
